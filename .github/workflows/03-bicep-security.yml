@@ -1,4 +1,4 @@
-name: Azure Bicep Template Analysis
+name: Azure ARM & Bicep Template Analysis
 
 on:
   workflow_dispatch:
@@ -17,7 +17,7 @@ on:
 jobs:
   checkov-scan:
     runs-on: ubuntu-latest
-    name: Checkov Bicep Analysis
+    name: Checkov ARM & Bicep Analysis
     permissions:
       contents: read # Allows actions/checkout to fetch the code
       security-events: write # Allows github/codeql-action/upload-sarif to upload SARIF results
@@ -39,7 +39,7 @@ jobs:
           directory: .
           quiet: true # Display only failed checks
           # soft_fail: true # Do not return an error code if there are failed checks
-          framework: arm # Specify to run checks only on Azure Bicep templates
+          framework: arm, bicep # Specify to run checks only on Azure Bicep and ARM templates
           output_format: junitxml # Set output format to JUnit XML for test result publishing
           output_file_path: bicep_results.xml # Specify the file path for the JUnit XML output
           # output_format: sarif # Set output format to SARIF for integration with GitHub security tab
